@@ -40,7 +40,11 @@ function parseTradePage(url, id) {
         let tel_re = /\(?(\d{2})\)?[\s\-]?(\d{4})\-?(\d{4})/
         let tel = word_p1.match(tel_re)
         if (!tel){
-            let tel_re = /\(?(\d{2})\)?[\s\-]?(\d{4})\-?(\d{4})/
+            let tel_re = /\(?(\d{2})\)?[\s\-]?(\d{3})\-?(\d{4})/
+            tel = word_p1.match(tel_re)
+        }
+        if (!tel){
+            let tel_re = /\(?(\d{2})\)?[\s\-]?(\d{4})\-?(\d{3})/
             tel = word_p1.match(tel_re)
         }
         if (tel) {
