@@ -15,7 +15,7 @@ function parseTradePage(url, id) {
 
         const word_p1 = $(".word_p1").text();
 
-        // Email
+        // Email.
         const email_re = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/
         let email = word_p1.match(email_re);
         if (email){
@@ -26,7 +26,7 @@ function parseTradePage(url, id) {
             result = result + ', '
         }
         
-        // Cell phone number
+        // Cell phone number.
         const phone_re = /09\d{2}-?\d{3}-?\d{3}/
         let phone = word_p1.match(phone_re)
         if (phone){
@@ -36,9 +36,13 @@ function parseTradePage(url, id) {
             result = result + ', '
         }
         
-        // Tel phone number
-        const tel_re = /\(?(\d{2})\)?[\s\-]?(\d{4})\-?(\d{4})/
+        // Tel phone number.
+        let tel_re = /\(?(\d{2})\)?[\s\-]?(\d{4})\-?(\d{4})/
         let tel = word_p1.match(tel_re)
+        if (!tel){
+            let tel_re = /\(?(\d{2})\)?[\s\-]?(\d{4})\-?(\d{4})/
+            tel = word_p1.match(tel_re)
+        }
         if (tel) {
             tel = tel[0].replace("-", "");
             tel = tel.replace("(", "");
@@ -48,15 +52,12 @@ function parseTradePage(url, id) {
             result = result + ','
         }
 
-
+        // Add new line.
         result = result + '\n'
 
-        
         fsLibrary.writeFile('newfile.txt', result, (error) => { 
             // In case of a error throw err exception. 
             if (error) throw err; 
         }) 
-    
-    })
-    
+    }) 
 }
