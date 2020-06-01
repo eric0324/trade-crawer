@@ -3,11 +3,11 @@ const cheerio = require('cheerio')
 const fsLibrary  = require('fs') 
 
 for (let i = 1 ; i<=100 ; i++ ){
-    parseTradePage('https://trade.1111.com.tw/Comp_Info.aspx?vNo=', i);
+    parseTradePage('https://trade.1111.com.tw/Comp_Info.aspx?vNo=' + i);
 }
 
 let result = '';
-function parseTradePage(url, id) {
+function parseTradePage(url) {
     request(url, (err, res, body) => {
         const $ = cheerio.load(body)
         const mutitle = $("h1").text();
